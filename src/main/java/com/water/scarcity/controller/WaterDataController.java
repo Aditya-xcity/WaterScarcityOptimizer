@@ -65,7 +65,7 @@ public class WaterDataController {
         log.info("GET /api/water-data/{}/latest - Fetching latest water data", communityId);
         
         return waterDataService.getLatestWaterData(communityId)
-            .map(ResponseEntity::ok)
+            .<ResponseEntity<?>>map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Map.of("message", "No water data found for community: " + communityId)));
     }

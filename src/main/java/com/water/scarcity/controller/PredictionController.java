@@ -100,7 +100,7 @@ public class PredictionController {
         log.info("GET /api/predictions/{} - Fetching latest prediction", communityId);
         
         return predictionService.getLatestPrediction(communityId)
-            .map(ResponseEntity::ok)
+            .<ResponseEntity<?>>map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Map.of("message", "No prediction found for community: " + communityId)));
     }

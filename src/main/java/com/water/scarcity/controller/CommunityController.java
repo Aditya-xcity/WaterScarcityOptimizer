@@ -57,7 +57,7 @@ public class CommunityController {
     public ResponseEntity<?> getCommunityById(@PathVariable Integer id) {
         log.info("GET /api/communities/{} - Fetching community", id);
         return communityService.getCommunityById(id)
-            .map(ResponseEntity::ok)
+            .<ResponseEntity<?>>map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Map.of("error", "Community not found with ID: " + id)));
     }
@@ -71,7 +71,7 @@ public class CommunityController {
     public ResponseEntity<?> getCommunityByName(@PathVariable String name) {
         log.info("GET /api/communities/search/{} - Searching community by name", name);
         return communityService.getCommunityByName(name)
-            .map(ResponseEntity::ok)
+            .<ResponseEntity<?>>map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Map.of("error", "Community not found with name: " + name)));
     }
